@@ -77,9 +77,12 @@ explain <- function(x, explainer, labels, n_labels = NULL, n_features,
   if (is.character(x) && is.image_file(x)) class(x) <- 'imagefile'
   UseMethod('explain', x)
 }
+
+#' @export
 model_type.explainer <- function(x) {
   model_type(x$model)
 }
+
 output_type <- function(x) {
   switch(
     model_type(x),
