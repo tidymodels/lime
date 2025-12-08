@@ -33,8 +33,8 @@ Ribeiro, M.T., Singh, S., Guestrin, C. \emph{"Why Should I Trust You?": Explaini
 Useful links:
 \itemize{
   \item \url{https://lime.data-imaginist.com}
-  \item \url{https://github.com/thomasp85/lime}
-  \item Report bugs at \url{https://github.com/thomasp85/lime/issues}
+  \item \url{https://github.com/tidymodels/lime}
+  \item Report bugs at \url{https://github.com/tidymodels/lime/issues}
 }
 
 }
@@ -43,7 +43,7 @@ Useful links:
 
 Authors:
 \itemize{
-  \item Thomas Lin Pedersen \email{thomasp85@gmail.com} (\href{https://orcid.org/0000-0002-5147-4711}{ORCID})
+  \item Thomas Lin Pedersen \email{tidymodels@gmail.com} (\href{https://orcid.org/0000-0002-5147-4711}{ORCID})
   \item Michaël Benesty \email{michael@benesty.fr}
 }
 
