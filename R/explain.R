@@ -72,9 +72,19 @@
 #' # This can now be used together with the explain method
 #' explain(iris_test, explanation, n_labels = 1, n_features = 2)
 #'
-explain <- function(x, explainer, labels, n_labels = NULL, n_features,
-                    n_permutations = 5000, feature_select = 'auto', ...) {
-  if (is.character(x) && is.image_file(x)) class(x) <- 'imagefile'
+explain <- function(
+  x,
+  explainer,
+  labels,
+  n_labels = NULL,
+  n_features,
+  n_permutations = 5000,
+  feature_select = 'auto',
+  ...
+) {
+  if (is.character(x) && is.image_file(x)) {
+    class(x) <- 'imagefile'
+  }
   UseMethod('explain', x)
 }
 

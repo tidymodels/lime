@@ -14,10 +14,17 @@ get_matrix <- function(text) {
 dtm_train = get_matrix(train_sentences$text)
 
 # Create boosting model
-xgb_model <- xgb.train(list(max_depth = 7, eta = 0.1, objective = "binary:logistic",
-                            eval_metric = "error", nthread = 1),
-                       xgb.DMatrix(dtm_train, label = train_sentences$class.text == "OWNX"),
-                       nrounds = 50)
+xgb_model <- xgb.train(
+  list(
+    max_depth = 7,
+    eta = 0.1,
+    objective = "binary:logistic",
+    eval_metric = "error",
+    nthread = 1
+  ),
+  xgb.DMatrix(dtm_train, label = train_sentences$class.text == "OWNX"),
+  nrounds = 50
+)
 
 
 test_that("single sentence explanation", {
@@ -34,20 +41,36 @@ test_that("single sentence explanation", {
 })
 
 test_that("multiple sentences, multiple explanations", {
-  sentences <- head(test_sentences[test_sentences$class.text == "OWNX", "text"], 5)
+  sentences <- head(
+    test_sentences[test_sentences$class.text == "OWNX", "text"],
+    5
+  )
   explainer <- lime(sentences, xgb_model, get_matrix)
   explanation <- explain(sentences, explainer, n_labels = 1, n_features = 2)
   expect_gte(sum(tolower(explanation$feature) == "we"), 3)
   expect_true("our" %in% explanation$feature)
   expect_equal(nrow(explanation), 5 * 2)
-  expect_true(all(explanation[explanation$feature == "our", "feature_weight"] > 0))
+  expect_true(all(
+    explanation[explanation$feature == "our", "feature_weight"] > 0
+  ))
   expect_gt(sum(explanation[explanation$feature == "we", "feature_weight"]), 0)
 })
 
 test_that("multiple sentences, single explanation", {
-  sentences <- head(test_sentences[test_sentences$class.text == "OWNX", "text"], 5)
+  sentences <- head(
+    test_sentences[test_sentences$class.text == "OWNX", "text"],
+    5
+  )
   explainer <- lime(sentences, xgb_model, get_matrix)
-  explanation <- explain(sentences, explainer, n_labels = 1, n_features = 5, single_explanation = TRUE)
-  expect_true(all(explanation[explanation$feature == "Section", "feature_weight"] > 0))
+  explanation <- explain(
+    sentences,
+    explainer,
+    n_labels = 1,
+    n_features = 5,
+    single_explanation = TRUE
+  )
+  expect_true(all(
+    explanation[explanation$feature == "Section", "feature_weight"] > 0
+  ))
   expect_gt(sum(explanation[explanation$feature == "we", "feature_weight"]), 0)
 })

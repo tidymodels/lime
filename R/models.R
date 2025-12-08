@@ -95,7 +95,9 @@ set_labels <- function(res, model) {
   labels <- attr(model, 'lime_labels')
   if (model_type(model) == 'classification' && !is.null(labels)) {
     if (length(labels) != ncol(res)) {
-      warning('Ignoring provided class labels as length differs from model output')
+      warning(
+        'Ignoring provided class labels as length differs from model output'
+      )
     } else {
       names(res) <- labels
     }
@@ -111,12 +113,16 @@ predict_model <- function(x, newdata, type, ...) {
 #' @export
 predict_model.default <- function(x, newdata, type, ...) {
   p <- predict(x, newdata = newdata, type = type, ...)
-  if (type == 'raw') p <- data.frame(Response = p, stringsAsFactors = FALSE)
+  if (type == 'raw') {
+    p <- data.frame(Response = p, stringsAsFactors = FALSE)
+  }
   as.data.frame(p)
 }
 #' @export
 predict_model.model_fit <- function(x, newdata, type, ...) {
-  if (type == 'raw') type <- 'numeric'
+  if (type == 'raw') {
+    type <- 'numeric'
+  }
   p <- predict(x, new_data = newdata, type = type, ...)
   if (type == 'raw') {
     p <- data.frame(Response = p[[1]], stringsAsFactors = FALSE)
@@ -133,7 +139,10 @@ predict_model.WrappedModel <- function(x, newdata, type, ...) {
   p <- predict(x, newdata = newdata, ...)
   switch(
     type,
-    raw = data.frame(Response = mlr::getPredictionResponse(p), stringsAsFactors = FALSE),
+    raw = data.frame(
+      Response = mlr::getPredictionResponse(p),
+      stringsAsFactors = FALSE
+    ),
     prob = mlr::getPredictionProbabilities(p, p$task.desc$class.levels),
     stop('Type must be either "raw" or "prob"', call. = FALSE)
   )
@@ -146,11 +155,15 @@ predict_model.xgb.Booster <- function(x, newdata, type, ...) {
   if (is.data.frame(newdata)) {
     newdata <- xgboost::xgb.DMatrix(as.matrix(newdata))
   }
-  p <- data.frame(predict(x, newdata = newdata, reshape = TRUE, ...), stringsAsFactors = FALSE)
+  p <- data.frame(
+    predict(x, newdata = newdata, reshape = TRUE, ...),
+    stringsAsFactors = FALSE
+  )
   if (type == 'raw') {
     names(p) <- 'Response'
   } else if (type == 'prob') {
-    if (ncol(p) == 1) { # Binary classification
+    if (ncol(p) == 1) {
+      # Binary classification
       names(p) = '1'
       p[['0']] <- 1 - p[['1']]
     } else {
@@ -185,20 +198,20 @@ predict_model.keras.engine.training.Model <- function(x, newdata, type, ...) {
   }
 }
 #' @export
-predict_model.H2OModel <- function(x, newdata, type, ...){
+predict_model.H2OModel <- function(x, newdata, type, ...) {
   if (!requireNamespace('h2o', quietly = TRUE)) {
-      stop('The h2o package is required for predicting h2o models')
+    stop('The h2o package is required for predicting h2o models')
   }
   pred <- h2o::h2o.predict(x, h2o::as.h2o(newdata))
   h2o_model_class <- class(x)[[1]]
   if (h2o_model_class %in% c("H2OBinomialModel", "H2OMultinomialModel")) {
-      return(as.data.frame(pred[,-1]))
+    return(as.data.frame(pred[, -1]))
   } else if (h2o_model_class == "H2ORegressionModel") {
-      ret <- as.data.frame(pred[,1])
-      names(ret) <- "Response"
-      return(ret)
+    ret <- as.data.frame(pred[, 1])
+    names(ret) <- "Response"
+    return(ret)
   } else {
-      stop('This h2o model is not currently supported.')
+    stop('This h2o model is not currently supported.')
   }
 }
 #' @export
@@ -210,7 +223,12 @@ predict_model.ranger <- function(x, newdata, type, ...) {
     res_votes <- predict(x, data = newdata, predict.all = TRUE, ...)$predictions
     res_votes <- t(table(res_votes, row(res_votes)))
     classes <- colnames(x$confusion.matrix)
-    res <- matrix(0, nrow = nrow(res_votes), ncol = length(classes), dimnames = list(NULL, classes))
+    res <- matrix(
+      0,
+      nrow = nrow(res_votes),
+      ncol = length(classes),
+      dimnames = list(NULL, classes)
+    )
     res[, as.integer(colnames(res_votes))] <- res_votes / x$num.trees
   } else {
     res <- predict(x, data = newdata, ...)$predictions
@@ -229,7 +247,10 @@ model_type <- function(x, ...) {
 }
 #' @export
 model_type.default <- function(x, ...) {
-  stop('The class of model must have a model_type method. See ?model_type to get an overview of models supported out of the box', call. = FALSE)
+  stop(
+    'The class of model must have a model_type method. See ?model_type to get an overview of models supported out of the box',
+    call. = FALSE
+  )
 }
 #' @export
 model_type.lime_classifier <- function(x, ...) 'classification'
@@ -257,8 +278,12 @@ model_type.WrappedModel <- function(x, ...) {
 #' @export
 model_type.xgb.Booster <- function(x, ...) {
   obj <- x$params$objective
-  if (is.null(obj)) return('regression')
-  if (is.function(obj)) stop('Unsupported model type', call. = FALSE)
+  if (is.null(obj)) {
+    return('regression')
+  }
+  if (is.function(obj)) {
+    stop('Unsupported model type', call. = FALSE)
+  }
   type <- strsplit(obj, ':')[[1]][1]
   switch(
     type,
@@ -276,7 +301,10 @@ model_type.keras.engine.training.Model <- function(x, ...) {
     stop('The keras package is required for predicting keras models')
   }
   num_layers <- length(x$layers)
-  if (keras::get_config(keras::get_layer(x, index = num_layers))$activation == 'linear') {
+  if (
+    keras::get_config(keras::get_layer(x, index = num_layers))$activation ==
+      'linear'
+  ) {
     'regression'
   } else {
     'classification'
@@ -286,21 +314,28 @@ model_type.keras.engine.training.Model <- function(x, ...) {
 model_type.H2OModel <- function(x, ...) {
   h2o_model_class <- class(x)[[1]]
   if (h2o_model_class %in% c("H2OBinomialModel", "H2OMultinomialModel")) {
-      return('classification')
+    return('classification')
   } else if (h2o_model_class == "H2ORegressionModel") {
-      return('regression')
+    return('regression')
   } else {
-      stop('This h2o model is not currently supported.')
+    stop('This h2o model is not currently supported.')
   }
 }
 #' @export
 model_type.ranger <- function(x, ...) {
   ranger_model_class <- x$treetype
-  if (ranger_model_class == "Probability estimation" || ranger_model_class == "Classification") {
+  if (
+    ranger_model_class == "Probability estimation" ||
+      ranger_model_class == "Classification"
+  ) {
     return('classification')
   } else if (ranger_model_class == "Regression") {
     return('regression')
   } else {
-    stop(paste0('ranger model class "',ranger_model_class,'" is not currently supported.'))
+    stop(paste0(
+      'ranger model class "',
+      ranger_model_class,
+      '" is not currently supported.'
+    ))
   }
 }
