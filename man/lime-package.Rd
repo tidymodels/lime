@@ -3,7 +3,6 @@
 \docType{package}
 \name{lime-package}
 \alias{lime-package}
-\alias{_PACKAGE}
 \title{lime: Local Interpretable Model-Agnostic Explanations}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
