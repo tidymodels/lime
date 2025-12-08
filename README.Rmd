@@ -111,8 +111,8 @@ install.packages('lime')
 To get the development version, install from GitHub instead:
 
 ```{r, eval=FALSE}
-# install.packages('devtools')
-devtools::install_github('tidymodels/lime')
+# install.packages('pak')
+pak::pak('tidymodels/lime')
 ```
 
 ## Code of Conduct

@@ -77,16 +77,16 @@ explanation
 #> # A tibble: 10 × 13
 #>    model_type   case  label label_prob model_r2 model_intercept model_prediction
 #>    <chr>        <chr> <chr>      <dbl>    <dbl>           <dbl>            <dbl>
-#>  1 classificat… 1     seto…          1    0.672           0.131            0.933
-#>  2 classificat… 1     seto…          1    0.672           0.131            0.933
-#>  3 classificat… 2     seto…          1    0.691           0.127            0.926
-#>  4 classificat… 2     seto…          1    0.691           0.127            0.926
-#>  5 classificat… 3     seto…          1    0.664           0.136            0.928
-#>  6 classificat… 3     seto…          1    0.664           0.136            0.928
-#>  7 classificat… 4     seto…          1    0.692           0.121            0.934
-#>  8 classificat… 4     seto…          1    0.692           0.121            0.934
-#>  9 classificat… 5     seto…          1    0.691           0.128            0.932
-#> 10 classificat… 5     seto…          1    0.691           0.128            0.932
+#>  1 classificat… 1     seto…          1    0.700           0.120            0.978
+#>  2 classificat… 1     seto…          1    0.700           0.120            0.978
+#>  3 classificat… 2     seto…          1    0.705           0.117            0.978
+#>  4 classificat… 2     seto…          1    0.705           0.117            0.978
+#>  5 classificat… 3     seto…          1    0.702           0.117            0.981
+#>  6 classificat… 3     seto…          1    0.702           0.117            0.981
+#>  7 classificat… 4     seto…          1    0.668           0.128            0.977
+#>  8 classificat… 4     seto…          1    0.668           0.128            0.977
+#>  9 classificat… 5     seto…          1    0.679           0.127            0.982
+#> 10 classificat… 5     seto…          1    0.679           0.127            0.982
 #> # ℹ 6 more variables: feature <chr>, feature_value <dbl>, feature_weight <dbl>,
 #> #   feature_desc <chr>, data <list>, prediction <list>
 
@@ -140,8 +140,8 @@ install.packages('lime')
 To get the development version, install from GitHub instead:
 
 ``` r
-# install.packages('devtools')
-devtools::install_github('tidymodels/lime')
+# install.packages('pak')
+pak::pak('tidymodels/lime')
 ```
 
 ## Code of Conduct
