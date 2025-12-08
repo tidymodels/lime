@@ -1,5 +1,3 @@
-context("h2o")
-
 skip_on_cran()
 library(h2o)
 h2o.init()

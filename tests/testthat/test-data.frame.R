@@ -1,4 +1,3 @@
-context("data.frame")
 library(MASS)
 
 test_that("lime explanation only produces one entry per case and feature", {

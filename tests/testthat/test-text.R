@@ -1,9 +1,10 @@
-context("Text explanation")
+skip_if_not_installed("xgboost")
 
 library(xgboost)
 library(text2vec)
 
 data(train_sentences)
+
 
 # Tokenize data
 get_matrix <- function(text) {

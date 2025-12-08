@@ -1,5 +1,3 @@
-context("Text permutations")
-
 test_that("properties of permutations are as expected", {
   set.seed(2000)
   original_document <- unique(as.integer(runif(20, 0, 30)))
