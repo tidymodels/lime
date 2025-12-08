@@ -20,9 +20,11 @@ for (file in text.files) {
   candidate <- readLines(file, warn = F) |>
     discard(~ stri_detect_regex(., "^#")) |>
     map(
-      ~ stri_split_regex(., pattern = "\t| ", n = 2) |>
-        unlist |>
-        paste(collapse = "|")
+      function(x) {
+        stri_split_regex(x, pattern = "\t| ", n = 2) |>
+          unlist |>
+          paste(collapse = "|")
+      }
     )
   if (!is_empty(candidate)) {
     dt.list[[file]] <- candidate |>
