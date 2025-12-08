@@ -63,3 +63,4 @@ Suggests: xgboost,
     ranger
 LinkingTo: Rcpp, 
     RcppEigen
+Config/usethis/last-upkeep: 2025-12-08
