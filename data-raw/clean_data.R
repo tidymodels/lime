@@ -1,7 +1,6 @@
 # code to reproduce the text data embedded with the package
 
 library(data.table)
-library(magrittr)
 library(purrr)
 library(stringi)
 
@@ -18,16 +17,16 @@ stop_words_sentences <- readLines(
 
 dt.list <- list()
 for (file in text.files) {
-  candidate <- readLines(file, warn = F) %>%
-    discard(~ stri_detect_regex(., "^#")) %>%
+  candidate <- readLines(file, warn = F) |>
+    discard(~ stri_detect_regex(., "^#")) |>
     map(
-      ~ stri_split_regex(., pattern = "\t| ", n = 2) %>%
-        unlist %>%
+      ~ stri_split_regex(., pattern = "\t| ", n = 2) |>
+        unlist |>
         paste(collapse = "|")
     )
   if (!is_empty(candidate)) {
-    dt.list[[file]] <- candidate %>%
-      paste(collapse = "\n") %>%
+    dt.list[[file]] <- candidate |>
+      paste(collapse = "\n") |>
       fread(
         input = .,
         sep = "|",
@@ -42,8 +41,8 @@ dt <- rbindlist(dt.list)
 dt[, .N, class.text]
 
 test.rows <- sample.int(nrow(dt), 600)
-train_sentences <- dt[-test.rows] %>% setDF() # remove DT wrapper
-test_sentences <- dt[test.rows] %>% setDF()
+train_sentences <- dt[-test.rows] |> setDF() # remove DT wrapper
+test_sentences <- dt[test.rows] |> setDF()
 
 # save files
 devtools::use_data(stop_words_sentences, overwrite = TRUE, compress = "gzip")
