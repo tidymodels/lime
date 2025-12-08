@@ -16,3 +16,5 @@
 ^CRAN-RELEASE$
 ^\.github$
 ^CRAN-SUBMISSION$
+^[.]?air[.]toml$
+^\.vscode$
