@@ -79,7 +79,7 @@ explain <- function(x, explainer, labels, n_labels = NULL, n_features,
 }
 
 #' @export
-model_type.explainer <- function(x) {
+model_type.explainer <- function(x, ...) {
   model_type(x$model)
 }
 

@@ -2,7 +2,7 @@ permute_cases <- function(cases, n_permutations, ...) {
   UseMethod('permute_cases')
 }
 #' @importFrom stats rnorm runif
-permute_cases.data.frame <- function(cases, n_permutations, feature_distribution, bin_continuous, bin_cuts, use_density) {
+permute_cases.data.frame <- function(cases, n_permutations, feature_distribution, bin_continuous, bin_cuts, use_density, ...) {
   nrows <- nrow(cases) * n_permutations
   perm <- as.data.frame(lapply(seq_along(cases), function(i) {
     perms <- if (is.numeric(cases[[i]]) && identical(is.na(feature_distribution[[i]]), TRUE)) {
@@ -37,7 +37,7 @@ permute_cases.data.frame <- function(cases, n_permutations, feature_distribution
 }
 
 #' @importFrom Matrix Matrix sparseMatrix
-permute_cases.character <- function(cases, n_permutations, tokenization, keep_word_position) {
+permute_cases.character <- function(cases, n_permutations, tokenization, keep_word_position, ...) {
   documents_tokens <- local({
     tokenized_cases <- lapply(cases, tokenization)
     token_end_positions <- cumsum(lengths(tokenized_cases))
