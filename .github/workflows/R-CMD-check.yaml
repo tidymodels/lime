@@ -56,7 +56,8 @@ jobs:
           extra-packages: 
             any::rcmdcheck, 
             any::XML,
-            xgboost=?ignore-before-r=4.3.0
+            xgboost=?ignore-before-r=4.3.0,
+            Matrix=?ignore-before-r=4.4.0
           needs: check
 
       - uses: r-lib/actions/check-r-package@v2
