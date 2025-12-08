@@ -10,6 +10,9 @@
 coverage](https://codecov.io/gh/tidymodels/lime/graph/badge.svg)](https://app.codecov.io/gh/tidymodels/lime)
 [![CRAN_Release_Badge](http://www.r-pkg.org/badges/version-ago/lime)](https://CRAN.R-project.org/package=lime)
 [![CRAN_Download_Badge](http://cranlogs.r-pkg.org/badges/lime)](https://CRAN.R-project.org/package=lime)
+[![R-CMD-check](https://github.com/thomasp85/lime/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/thomasp85/lime/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/thomasp85/lime/graph/badge.svg)](https://app.codecov.io/gh/thomasp85/lime)
 <!-- badges: end -->
 
 > There once was a package called lime,
@@ -77,16 +80,16 @@ explanation
 #> # A tibble: 10 × 13
 #>    model_type   case  label label_prob model_r2 model_intercept model_prediction
 #>    <chr>        <chr> <chr>      <dbl>    <dbl>           <dbl>            <dbl>
-#>  1 classificat… 1     seto…          1    0.700           0.120            0.978
-#>  2 classificat… 1     seto…          1    0.700           0.120            0.978
-#>  3 classificat… 2     seto…          1    0.705           0.117            0.978
-#>  4 classificat… 2     seto…          1    0.705           0.117            0.978
-#>  5 classificat… 3     seto…          1    0.702           0.117            0.981
-#>  6 classificat… 3     seto…          1    0.702           0.117            0.981
-#>  7 classificat… 4     seto…          1    0.668           0.128            0.977
-#>  8 classificat… 4     seto…          1    0.668           0.128            0.977
-#>  9 classificat… 5     seto…          1    0.679           0.127            0.982
-#> 10 classificat… 5     seto…          1    0.679           0.127            0.982
+#>  1 classificat… 1     seto…          1    0.686           0.125            0.978
+#>  2 classificat… 1     seto…          1    0.686           0.125            0.978
+#>  3 classificat… 2     seto…          1    0.696           0.119            0.982
+#>  4 classificat… 2     seto…          1    0.696           0.119            0.982
+#>  5 classificat… 3     seto…          1    0.682           0.123            0.977
+#>  6 classificat… 3     seto…          1    0.682           0.123            0.977
+#>  7 classificat… 4     seto…          1    0.679           0.124            0.979
+#>  8 classificat… 4     seto…          1    0.679           0.124            0.979
+#>  9 classificat… 5     seto…          1    0.688           0.123            0.988
+#> 10 classificat… 5     seto…          1    0.688           0.123            0.988
 #> # ℹ 6 more variables: feature <chr>, feature_value <dbl>, feature_weight <dbl>,
 #> #   feature_desc <chr>, data <list>, prediction <list>
 
