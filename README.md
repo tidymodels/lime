@@ -7,7 +7,7 @@
 
 [![R-CMD-check](https://github.com/tidymodels/lime/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tidymodels/lime/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
-coverage](https://codecov.io/gh/tidymodels/lime/branch/main/graph/badge.svg)](https://app.codecov.io/gh/tidymodels/lime?branch=main)
+coverage](https://codecov.io/gh/tidymodels/lime/graph/badge.svg)](https://app.codecov.io/gh/tidymodels/lime)
 [![CRAN_Release_Badge](http://www.r-pkg.org/badges/version-ago/lime)](https://CRAN.R-project.org/package=lime)
 [![CRAN_Download_Badge](http://cranlogs.r-pkg.org/badges/lime)](https://CRAN.R-project.org/package=lime)
 <!-- badges: end -->
@@ -77,21 +77,28 @@ explanation
 #> # A tibble: 10 × 13
 #>    model_type   case  label label_prob model_r2 model_intercept model_prediction
 #>    <chr>        <chr> <chr>      <dbl>    <dbl>           <dbl>            <dbl>
-#>  1 classificat… 1     seto…          1    0.695           0.118            0.991
-#>  2 classificat… 1     seto…          1    0.695           0.118            0.991
-#>  3 classificat… 2     seto…          1    0.680           0.123            0.974
-#>  4 classificat… 2     seto…          1    0.680           0.123            0.974
-#>  5 classificat… 3     seto…          1    0.668           0.134            0.972
-#>  6 classificat… 3     seto…          1    0.668           0.134            0.972
-#>  7 classificat… 4     seto…          1    0.668           0.132            0.980
-#>  8 classificat… 4     seto…          1    0.668           0.132            0.980
-#>  9 classificat… 5     seto…          1    0.691           0.125            0.980
-#> 10 classificat… 5     seto…          1    0.691           0.125            0.980
-#> # … with 6 more variables: feature <chr>, feature_value <dbl>,
-#> #   feature_weight <dbl>, feature_desc <chr>, data <list>, prediction <list>
+#>  1 classificat… 1     seto…          1    0.672           0.131            0.933
+#>  2 classificat… 1     seto…          1    0.672           0.131            0.933
+#>  3 classificat… 2     seto…          1    0.691           0.127            0.926
+#>  4 classificat… 2     seto…          1    0.691           0.127            0.926
+#>  5 classificat… 3     seto…          1    0.664           0.136            0.928
+#>  6 classificat… 3     seto…          1    0.664           0.136            0.928
+#>  7 classificat… 4     seto…          1    0.692           0.121            0.934
+#>  8 classificat… 4     seto…          1    0.692           0.121            0.934
+#>  9 classificat… 5     seto…          1    0.691           0.128            0.932
+#> 10 classificat… 5     seto…          1    0.691           0.128            0.932
+#> # ℹ 6 more variables: feature <chr>, feature_value <dbl>, feature_weight <dbl>,
+#> #   feature_desc <chr>, data <list>, prediction <list>
 
 # And can be visualised directly
 plot_features(explanation)
+#> Warning: `aes_()` was deprecated in ggplot2 3.0.0.
+#> ℹ Please use tidy evaluation idioms with `aes()`
+#> ℹ The deprecated feature was likely used in the lime package.
+#>   Please report the issue at <https://github.com/tidymodels/lime/issues>.
+#> This warning is displayed once every 8 hours.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+#> generated.
 ```
 
 ![](man/figures/README-unnamed-chunk-2-1.png)<!-- -->
@@ -115,7 +122,11 @@ For text the explanation can be shown by highlighting the important
 words. It even includes a `shiny` application for interactively
 exploring text models:
 
-![interactive text explainer](man/figures/shine_text_explanations.gif)
+<figure>
+<img src="man/figures/shine_text_explanations.gif"
+alt="interactive text explainer" />
+<figcaption aria-hidden="true">interactive text explainer</figcaption>
+</figure>
 
 ## Installation
 
