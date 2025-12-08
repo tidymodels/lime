@@ -25,14 +25,17 @@
 
 ## usethis namespace: start
 #' @import ggplot2
+#' @import rlang
 #' @importFrom assertthat assert_that
 #' @importFrom assertthat is.count
 #' @importFrom assertthat is.flag
 #' @importFrom assertthat is.number
 #' @importFrom assertthat is.string
+#' @importFrom glue glue
 #' @importFrom gower gower_dist
 #' @importFrom grDevices as.raster
 #' @importFrom grDevices rgb
+#' @importFrom lifecycle deprecated
 #' @importFrom Matrix Matrix
 #' @importFrom Matrix sparseMatrix
 #' @importFrom methods as

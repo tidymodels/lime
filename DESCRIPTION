@@ -34,7 +34,8 @@ LazyData: true
 RoxygenNote: 7.3.3
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
-Imports: glmnet,
+Imports: 
+    glmnet,
     stats,
     ggplot2,
     tools,
@@ -44,7 +45,10 @@ Imports: glmnet,
     assertthat,
     methods,
     grDevices,
-    gower
+    gower,
+    rlang,
+    lifecycle,
+    glue
 Suggests: 
     xgboost,
     testthat (>= 3.0.0),
