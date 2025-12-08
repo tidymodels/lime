@@ -1,10 +1,9 @@
-pandoc: 2.14.2
-pkgdown: 2.0.6
+pandoc: 3.1.11
+pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
   Understanding_lime: Understanding_lime.html
-last_built: 2022-08-19T09:00Z
+last_built: 2025-12-08T19:40Z
 urls:
   reference: https://lime.data-imaginist.com/reference
   article: https://lime.data-imaginist.com/articles
-
