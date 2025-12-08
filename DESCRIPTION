@@ -45,8 +45,9 @@ Imports: glmnet,
     methods,
     grDevices,
     gower
-Suggests: xgboost,
-    testthat,
+Suggests: 
+    xgboost,
+    testthat (>= 3.0.0),
     mlr,
     h2o,
     text2vec,
@@ -64,3 +65,4 @@ Suggests: xgboost,
 LinkingTo: Rcpp, 
     RcppEigen
 Config/usethis/last-upkeep: 2025-12-08
+Config/testthat/edition: 3

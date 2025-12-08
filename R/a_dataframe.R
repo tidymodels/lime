@@ -4,7 +4,6 @@
 #' @param n_bins The number of bins for continuous variables if `bin_continuous = TRUE`
 #' @param quantile_bins Should the bins be based on `n_bins` quantiles or spread evenly over the range of the training data
 #' @param use_density If `bin_continuous = FALSE` should continuous data be sampled using a kernel density estimation. If not, continuous features are expected to follow a normal distribution.
-#' @importFrom stats predict sd quantile density
 #' @export
 #'
 #' @examples
@@ -94,8 +93,6 @@ lime.data.frame <- function(x, model, preprocess = NULL, bin_continuous = TRUE, 
 #' @param gower_pow A modifier for gower distance. The calculated distance will
 #' be raised to the power of this value.
 #'
-#' @importFrom gower gower_dist
-#' @importFrom stats dist
 #' @export
 explain.data.frame <- function(x, explainer, labels = NULL, n_labels = NULL,
                                n_features, n_permutations = 5000,
@@ -157,7 +154,7 @@ explain.data.frame <- function(x, explainer, labels = NULL, n_labels = NULL,
   as_tibble(res)
 }
 is.data_frame_explainer <- function(x) inherits(x, 'data_frame_explainer')
-#' @importFrom stats setNames
+
 numerify <- function(x, type, bin_continuous, bin_cuts) {
   setNames(as.data.frame(lapply(seq_along(x), function(i) {
     if (type[i] %in% c('character', 'factor', 'logical')) {
@@ -177,7 +174,7 @@ numerify <- function(x, type, bin_continuous, bin_cuts) {
     }
   }), stringsAsFactors = FALSE), names(x))
 }
-#' @importFrom stats setNames
+
 feature_scale <- function(x, distribution, type, bin_continuous) {
   setNames(as.data.frame(lapply(seq_along(x), function(i) {
     if (type[i] == 'numeric' && !bin_continuous) {

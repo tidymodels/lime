@@ -41,7 +41,6 @@
 #' # which makes sense regarding the task.
 #' print(explanations)
 #' }
-#' @importFrom assertthat assert_that is.flag
 #' @export
 lime.character <- function(x, model, preprocess = NULL, tokenization = default_tokenize, keep_word_position = FALSE, ...) {
   if (is.null(preprocess)) preprocess <- function(x) x
@@ -61,7 +60,6 @@ lime.character <- function(x, model, preprocess = NULL, tokenization = default_t
 #' @param single_explanation A boolean indicating whether to pool all text in
 #' `x` into a single explanation.
 #'
-#' @importFrom assertthat assert_that is.count
 #' @export
 explain.character <- function(x, explainer, labels = NULL, n_labels = NULL,
                               n_features, n_permutations = 5000,
@@ -130,7 +128,6 @@ is.text_explainer <- function(x) inherits(x, 'text_explainer')
 #'
 #' @param text text to tokenize as a `character` vector
 #' @return a `character` vector.
-#' @importFrom stringi stri_split_boundaries
 #' @export
 #'
 #' @examples

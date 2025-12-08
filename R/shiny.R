@@ -11,8 +11,6 @@
 #' @param max_feature_to_select up limit to the number of words that can be selected
 #'
 #' @rdname interactive_text_explanations
-#' @importFrom stringi stri_count_words stri_replace_all_fixed
-#' @importFrom assertthat assert_that is.string is.count
 #' @export
 #'
 #' @examples

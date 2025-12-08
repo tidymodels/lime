@@ -23,7 +23,6 @@
 #'
 #' @return A ggplot object
 #'
-#' @import ggplot2
 #' @export
 #'
 #' @examples
@@ -170,7 +169,6 @@ plot_superpixels <- function(path, n_superpixels = 50, weight = 20, n_iter = 10,
     theme_void()
 }
 
-#' @importFrom grDevices rgb
 hightlight_segments <- function(im, pixels, display, fill_alpha, outline_col,
                                 block_col) {
   if (!requireNamespace('magick', quietly = TRUE)) {
@@ -198,7 +196,7 @@ hightlight_segments <- function(im, pixels, display, fill_alpha, outline_col,
   }
   magick::image_composite(im, magick::image_read(hl))
 }
-#' @importFrom grDevices as.raster
+
 tidy_raster <- function(im) {
   if (!requireNamespace('magick', quietly = TRUE)) {
     stop('The magick package is required for image explanation', call. = FALSE)

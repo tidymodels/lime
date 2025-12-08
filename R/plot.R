@@ -14,7 +14,6 @@
 #'
 #' @return A `ggplot` object
 #'
-#' @import ggplot2
 #' @export
 #'
 #' @family explanation plots
@@ -84,7 +83,6 @@ plot_features <- function(explanation, ncol = 2, cases = NULL) {
 #'
 #' @return A `ggplot` object
 #'
-#' @import ggplot2
 #' @export
 #'
 #' @family explanation plots
@@ -145,7 +143,6 @@ theme_lime <- function(...) {
       ...
     )
 }
-#' @importFrom tools toTitleCase
 label_both_upper <- function(labels, multi_line = TRUE, sep = ': ') {
   names(labels) <- toTitleCase(names(labels))
   label_both(labels, multi_line, sep)

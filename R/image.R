@@ -51,7 +51,6 @@ lime.imagefile <- function(x, model, preprocess = NULL, ...) {
 #' @param batch_size The number of explanations to handle at a time
 #' @param background The colour to use for blocked out superpixels
 #'
-#' @importFrom methods as
 #' @export
 explain.imagefile <- function(x, explainer, labels = NULL, n_labels = NULL,
                               n_features, n_permutations = 1000,
@@ -175,7 +174,6 @@ format.bitmap_list <- function(x, ...) {
 format.superpixel_list <- function(x, ...) {
   vapply(x, function(el) {paste0(length(el), 'px superpixel')}, character(1))
 }
-#' @importFrom tools file_ext
 is.image_file <- function(x) {
   all(file.exists(x) & all(tolower(file_ext(x)) %in% image_ext))
 }

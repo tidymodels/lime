@@ -5,7 +5,6 @@
 #' @param explanations object returned by the [lime.character] function.
 #' @param ... parameters passed to `htmlwidgets::sizingPolicy()`
 #'
-#' @importFrom assertthat assert_that is.number is.string
 #' @rdname text_explanations
 #' @export
 #'
@@ -80,7 +79,6 @@ plot_text_explanations <- function(explanations, ...) {
   )
 }
 
-#' @importFrom stringi stri_replace_all_regex
 get_html_span <- function(text, current_case_df) {
   result <- text
   for (word in current_case_df$feature) {
