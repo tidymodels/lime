@@ -1,4 +1,5 @@
 skip_if_not_installed("xgboost")
+skip_if_not_installed("text2vec")
 
 library(xgboost)
 library(text2vec)
