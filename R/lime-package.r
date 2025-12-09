@@ -20,5 +20,41 @@
 #' @aliases lime-package
 #' @useDynLib lime
 #' @importFrom Rcpp sourceCpp
+#' @keywords internal
 '_PACKAGE'
 
+## usethis namespace: start
+#' @import ggplot2
+#' @import rlang
+#' @importFrom assertthat assert_that
+#' @importFrom assertthat is.count
+#' @importFrom assertthat is.flag
+#' @importFrom assertthat is.number
+#' @importFrom assertthat is.string
+#' @importFrom glue glue
+#' @importFrom gower gower_dist
+#' @importFrom grDevices as.raster
+#' @importFrom grDevices rgb
+#' @importFrom lifecycle deprecated
+#' @importFrom Matrix Matrix
+#' @importFrom Matrix sparseMatrix
+#' @importFrom methods as
+#' @importFrom stats density
+#' @importFrom stats dist
+#' @importFrom stats predict
+#' @importFrom stats quantile
+#' @importFrom stats rnorm
+#' @importFrom stats runif
+#' @importFrom stats sd
+#' @importFrom stats setNames
+#' @importFrom stringi stri_count_words
+#' @importFrom stringi stri_replace_all_fixed
+#' @importFrom stringi stri_replace_all_regex
+#' @importFrom stringi stri_split_boundaries
+#' @importFrom tools file_ext
+#' @importFrom tools toTitleCase
+## usethis namespace: end
+
+## mockable bindings: start
+## mockable bindings: end
+NULL

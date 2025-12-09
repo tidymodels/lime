@@ -5,7 +5,6 @@
 #' @param explanations object returned by the [lime.character] function.
 #' @param ... parameters passed to `htmlwidgets::sizingPolicy()`
 #'
-#' @importFrom assertthat assert_that is.number is.string
 #' @rdname text_explanations
 #' @export
 #'
@@ -31,7 +30,7 @@ plot_text_explanations <- function(explanations, ...) {
   original_text <- explanations$data
 
   text_highlighted_raw <- lapply(unique(explanations$case), function(id) {
-    current_case_df <- explanations[explanations$case == id,]
+    current_case_df <- explanations[explanations$case == id, ]
     original_text <- unique(current_case_df[["data"]])
     predicted_label <- unique(current_case_df[["label"]])
     predicted_label_prob <- unique(current_case_df[["label_prob"]])
@@ -48,10 +47,12 @@ plot_text_explanations <- function(explanations, ...) {
       '</sub>'
     )
 
-    current_case_df$weight_percent <- abs(current_case_df$feature_weight) / sum(abs(current_case_df$feature_weight))
+    current_case_df$weight_percent <- abs(current_case_df$feature_weight) /
+      sum(abs(current_case_df$feature_weight))
 
     current_case_df$sign <- ifelse(current_case_df$feature_weight > 0, 1, -1)
-    current_case_df$code_level <- current_case_df$sign * (1 + current_case_df$weight_percent %/% 0.2)
+    current_case_df$code_level <- current_case_df$sign *
+      (1 + current_case_df$weight_percent %/% 0.2)
     current_case_df$color <- sapply(current_case_df$code_level, get_color_code)
 
     paste(
@@ -80,11 +81,13 @@ plot_text_explanations <- function(explanations, ...) {
   )
 }
 
-#' @importFrom stringi stri_replace_all_regex
 get_html_span <- function(text, current_case_df) {
   result <- text
   for (word in current_case_df$feature) {
-    color <- as.character(current_case_df[current_case_df$feature == word, "color"])
+    color <- as.character(current_case_df[
+      current_case_df$feature == word,
+      "color"
+    ])
     text_searched <- paste0("(\\b", word, "\\b)")
     replace_expression <- paste0("<span class='", color, "'>", "$1", "</span>")
     result <- stri_replace_all_regex(result, text_searched, replace_expression)
@@ -93,17 +96,19 @@ get_html_span <- function(text, current_case_df) {
 }
 
 get_color_code <- function(code_level) {
-  switch(as.character(code_level),
-         "-6" = "negative_5", # for -100%
-         "-5" = "negative_5",
-         "-4" = "negative_4",
-         "-3" = "negative_3",
-         "-2" = "negative_2",
-         "-1" = "negative_1",
-         "1" = "positive_1",
-         "2" = "positive_2",
-         "3" = "positive_3",
-         "4" = "positive_4",
-         "5" = "positive_5",
-         "6" = "positive_5") # for 100%
+  switch(
+    as.character(code_level),
+    "-6" = "negative_5", # for -100%
+    "-5" = "negative_5",
+    "-4" = "negative_4",
+    "-3" = "negative_3",
+    "-2" = "negative_2",
+    "-1" = "negative_1",
+    "1" = "positive_1",
+    "2" = "positive_2",
+    "3" = "positive_3",
+    "4" = "positive_4",
+    "5" = "positive_5",
+    "6" = "positive_5"
+  ) # for 100%
 }

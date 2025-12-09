@@ -27,7 +27,7 @@ navbar:
         href: news/index.html
   right:
     - icon: fa-github fa-lg
-      href: https://github.com/thomasp85/lime
+      href: https://github.com/tidymodels/lime
 
 reference:
   - title: "Creating explanations"

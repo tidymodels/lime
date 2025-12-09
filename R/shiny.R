@@ -11,8 +11,6 @@
 #' @param max_feature_to_select up limit to the number of words that can be selected
 #'
 #' @rdname interactive_text_explanations
-#' @importFrom stringi stri_count_words stri_replace_all_fixed
-#' @importFrom assertthat assert_that is.string is.count
 #' @export
 #'
 #' @examples
@@ -42,14 +40,23 @@
 #' # The explainer can now be queried interactively:
 #' interactive_text_explanations(explainer)
 #' }
-interactive_text_explanations <- function(explainer, window_title = "Text model explainer",
-                                          title = "Local Interpretable Model-agnostic Explanations",
-                                          place_holder = "Put here the text to explain",
-                                          minimum_lentgh = 3,
-                                          minimum_lentgh_error = "Text provided is too short to be explained (>= 3).",
-                                          max_feature_to_select = 20) {
-  if (!requireNamespace('shiny', quietly = TRUE) || !requireNamespace('shinythemes', quietly = TRUE)) {
-    stop('shiny and shinythemes are required for this functionality', call. = FALSE)
+interactive_text_explanations <- function(
+  explainer,
+  window_title = "Text model explainer",
+  title = "Local Interpretable Model-agnostic Explanations",
+  place_holder = "Put here the text to explain",
+  minimum_lentgh = 3,
+  minimum_lentgh_error = "Text provided is too short to be explained (>= 3).",
+  max_feature_to_select = 20
+) {
+  if (
+    !requireNamespace('shiny', quietly = TRUE) ||
+      !requireNamespace('shinythemes', quietly = TRUE)
+  ) {
+    stop(
+      'shiny and shinythemes are required for this functionality',
+      call. = FALSE
+    )
   }
   assert_that(is.list(explainer))
   assert_that(is.string(window_title))
@@ -67,28 +74,63 @@ interactive_text_explanations <- function(explainer, window_title = "Text model 
     as.list(strategies)
   })
 
-  ui <- shiny::fluidPage(title = window_title,
-                  theme = shinythemes::shinytheme("superhero"),
-                  shiny::titlePanel(title = title),
-                  shiny::hr(),
-                  shiny::sidebarPanel(
-                    shiny::textAreaInput("text_to_explain", label = NULL, resize = "both", placeholder = place_holder, height = "200px"),
-                    shiny::numericInput("number_permutations", label = shiny::h5("Quantity of permutations to generate"), value = 5000, step = 1000),
-                    shiny::selectInput("feature_selection_strategy", label = shiny::h5("Word selection strategies"), choices = feature_selection_strategy, selected = "auto"),
-                    shiny::sliderInput("number_features_to_explain", label = shiny::h5("Number of words to select"), min = 1, max = max_feature_to_select, value = 2, ticks = FALSE)
-                  ),
-                  shiny::mainPanel(
-                    text_explanations_output("text_explanations_plot")#,
-                    #plotOutput("feature_weight_plot")
-                  ))
+  ui <- shiny::fluidPage(
+    title = window_title,
+    theme = shinythemes::shinytheme("superhero"),
+    shiny::titlePanel(title = title),
+    shiny::hr(),
+    shiny::sidebarPanel(
+      shiny::textAreaInput(
+        "text_to_explain",
+        label = NULL,
+        resize = "both",
+        placeholder = place_holder,
+        height = "200px"
+      ),
+      shiny::numericInput(
+        "number_permutations",
+        label = shiny::h5("Quantity of permutations to generate"),
+        value = 5000,
+        step = 1000
+      ),
+      shiny::selectInput(
+        "feature_selection_strategy",
+        label = shiny::h5("Word selection strategies"),
+        choices = feature_selection_strategy,
+        selected = "auto"
+      ),
+      shiny::sliderInput(
+        "number_features_to_explain",
+        label = shiny::h5("Number of words to select"),
+        min = 1,
+        max = max_feature_to_select,
+        value = 2,
+        ticks = FALSE
+      )
+    ),
+    shiny::mainPanel(
+      text_explanations_output("text_explanations_plot") #,
+      #plotOutput("feature_weight_plot")
+    )
+  )
 
   # Define server logic for slider examples ----
   server <- function(input, output) {
     output$text_explanations_plot <- render_text_explanations({
       shiny::validate(
-        shiny::need(stri_count_words(input$text_to_explain) >= minimum_lentgh, message = minimum_lentgh_error)
+        shiny::need(
+          stri_count_words(input$text_to_explain) >= minimum_lentgh,
+          message = minimum_lentgh_error
+        )
       )
-      shared_states$explanations <<- explain(input$text_to_explain, explainer, n_labels = 1, n_features = input$number_features_to_explain, feature_select = input$feature_selection_strategy, n_permutations = input$number_permutations)
+      shared_states$explanations <<- explain(
+        input$text_to_explain,
+        explainer,
+        n_labels = 1,
+        n_features = input$number_features_to_explain,
+        feature_select = input$feature_selection_strategy,
+        n_permutations = input$number_permutations
+      )
       plot_text_explanations(shared_states$explanations)
     })
     # output$feature_weight_plot <- renderPlot({
@@ -109,11 +151,21 @@ interactive_text_explanations <- function(explainer, window_title = "Text model 
 #' @return An output function that enables the use of the widget within Shiny applications.
 #' @rdname interactive_text_explanations
 #' @export
-text_explanations_output <- function(outputId, width = "100%", height = "400px") {
+text_explanations_output <- function(
+  outputId,
+  width = "100%",
+  height = "400px"
+) {
   if (!requireNamespace('htmlwidgets', quietly = TRUE)) {
     stop('htmlwidgets is required for this functionality', call. = FALSE)
   }
-  htmlwidgets::shinyWidgetOutput(outputId, "plot_text_explanations", width, height, package = "lime")
+  htmlwidgets::shinyWidgetOutput(
+    outputId,
+    "plot_text_explanations",
+    width,
+    height,
+    package = "lime"
+  )
 }
 
 #' Shiny widget render
@@ -126,11 +178,21 @@ text_explanations_output <- function(outputId, width = "100%", height = "400px")
 #' @return A render function that enables the use of the widget within Shiny applications.
 #' @rdname interactive_text_explanations
 #' @export
-render_text_explanations <- function(expr, env = parent.frame(), quoted = FALSE) {
+render_text_explanations <- function(
+  expr,
+  env = parent.frame(),
+  quoted = FALSE
+) {
   if (!requireNamespace('htmlwidgets', quietly = TRUE)) {
     stop('htmlwidgets is required for this functionality', call. = FALSE)
   }
-  if (!quoted) { expr <- substitute(expr) } # force quoted
-  htmlwidgets::shinyRenderWidget(expr, text_explanations_output, env, quoted = TRUE)
+  if (!quoted) {
+    expr <- substitute(expr)
+  } # force quoted
+  htmlwidgets::shinyRenderWidget(
+    expr,
+    text_explanations_output,
+    env,
+    quoted = TRUE
+  )
 }
-
