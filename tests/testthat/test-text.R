@@ -28,9 +28,7 @@ xgb_model <- xgb.train(
   nrounds = 50
 )
 
-
 test_that("single sentence explanation", {
-  skip("xgboost: will fix soon")
   to_explain <- "Since our motivation is an application in bioinformatics, our notation and terminology will be drawn from that area"
   expect_gt(predict(xgb_model, get_matrix(to_explain)), 0.5)
   explainer <- lime(x = to_explain, model = xgb_model, preprocess = get_matrix)

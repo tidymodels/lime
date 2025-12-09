@@ -155,10 +155,11 @@ predict_model.xgb.Booster <- function(x, newdata, type, ...) {
   if (is.data.frame(newdata)) {
     newdata <- xgboost::xgb.DMatrix(as.matrix(newdata))
   }
-  p <- data.frame(
-    predict(x, newdata = newdata, reshape = TRUE, ...),
-    stringsAsFactors = FALSE
-  )
+  if (is.null(x$params)) {
+    p <- data.frame(predict(x, newdata = newdata, ...))
+  } else {
+    p <- data.frame(predict(x, newdata = newdata, reshape = TRUE, ...))
+  }
   if (type == 'raw') {
     names(p) <- 'Response'
   } else if (type == 'prob') {
@@ -277,7 +278,7 @@ model_type.WrappedModel <- function(x, ...) {
 }
 #' @export
 model_type.xgb.Booster <- function(x, ...) {
-  obj <- x$params$objective
+  obj <- x$params$objective %||% attr(x, "params")$objective
   if (is.null(obj)) {
     return('regression')
   }
