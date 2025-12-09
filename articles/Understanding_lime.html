@@ -76,7 +76,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/thomasp85/lime" class="external-link">
+  <a href="https://github.com/tidymodels/lime" class="external-link">
     <span class="fa fa-github fa-lg"></span>
 
   </a>
@@ -98,9 +98,9 @@
                         <h4 data-toc-skip class="author">Thomas Lin
 Pedersen &amp; Michaël Benesty</h4>
             
-            <h4 data-toc-skip class="date">2025-12-08</h4>
+            <h4 data-toc-skip class="date">2025-12-09</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/thomasp85/lime/blob/main/vignettes/Understanding_lime.Rmd" class="external-link"><code>vignettes/Understanding_lime.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tidymodels/lime/blob/main/vignettes/Understanding_lime.Rmd" class="external-link"><code>vignettes/Understanding_lime.Rmd</code></a></small>
       <div class="hidden name"><code>Understanding_lime.Rmd</code></div>
 
     </div>
@@ -260,11 +260,18 @@ of a model predicting cancer based on biopsy results:</p>
 <span><span class="co"># First we'll clean up the data a bit</span></span>
 <span><span class="va">biopsy</span><span class="op">$</span><span class="va">ID</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
 <span><span class="va">biopsy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html" class="external-link">na.omit</a></span><span class="op">(</span><span class="va">biopsy</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">biopsy</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'clump thickness'</span>, <span class="st">'uniformity of cell size'</span>, </span>
-<span>                   <span class="st">'uniformity of cell shape'</span>, <span class="st">'marginal adhesion'</span>,</span>
-<span>                   <span class="st">'single epithelial cell size'</span>, <span class="st">'bare nuclei'</span>, </span>
-<span>                   <span class="st">'bland chromatin'</span>, <span class="st">'normal nucleoli'</span>, <span class="st">'mitoses'</span>,</span>
-<span>                   <span class="st">'class'</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">biopsy</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">'clump thickness'</span>,</span>
+<span>  <span class="st">'uniformity of cell size'</span>,</span>
+<span>  <span class="st">'uniformity of cell shape'</span>,</span>
+<span>  <span class="st">'marginal adhesion'</span>,</span>
+<span>  <span class="st">'single epithelial cell size'</span>,</span>
+<span>  <span class="st">'bare nuclei'</span>,</span>
+<span>  <span class="st">'bland chromatin'</span>,</span>
+<span>  <span class="st">'normal nucleoli'</span>,</span>
+<span>  <span class="st">'mitoses'</span>,</span>
+<span>  <span class="st">'class'</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Now we'll fit a linear discriminant model on all but 4 cases</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span></span>
@@ -295,8 +302,18 @@ pretty solid predictions:</p>
 <span><span class="co">## 385 -2.221096</span></span></code></pre>
 <p>But lets see how these predictions came to be, using lime.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">explainer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lime.html">lime</a></span><span class="op">(</span><span class="va">biopsy</span><span class="op">[</span><span class="op">-</span><span class="va">test_set</span>,<span class="op">]</span>, <span class="va">model</span>, bin_continuous <span class="op">=</span> <span class="cn">TRUE</span>, quantile_bins <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="va">explanation</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/explain.html">explain</a></span><span class="op">(</span><span class="va">biopsy</span><span class="op">[</span><span class="va">test_set</span>, <span class="op">]</span>, <span class="va">explainer</span>, n_labels <span class="op">=</span> <span class="fl">1</span>, n_features <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">explainer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lime.html">lime</a></span><span class="op">(</span></span>
+<span>  <span class="va">biopsy</span><span class="op">[</span><span class="op">-</span><span class="va">test_set</span>, <span class="op">]</span>,</span>
+<span>  <span class="va">model</span>,</span>
+<span>  bin_continuous <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  quantile_bins <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">explanation</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/explain.html">explain</a></span><span class="op">(</span></span>
+<span>  <span class="va">biopsy</span><span class="op">[</span><span class="va">test_set</span>, <span class="op">]</span>,</span>
+<span>  <span class="va">explainer</span>,</span>
+<span>  n_labels <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  n_features <span class="op">=</span> <span class="fl">4</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co"># Only showing part of output for better printing</span></span>
 <span><span class="va">explanation</span><span class="op">[</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">9</span><span class="op">]</span></span></code></pre></div>
 <pre><code><span><span class="co">##    case  label label_prob  model_r2 model_intercept model_prediction</span></span>
@@ -344,7 +361,7 @@ explanations.</p>
 <pre><code><span><span class="co">## Warning: `aes_()` was deprecated in ggplot2 3.0.0.</span></span>
 <span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Please use tidy evaluation idioms with `aes()`</span></span>
 <span><span class="co">## <span style="color: #00BBBB;">ℹ</span> The deprecated feature was likely used in the <span style="color: #0000BB;">lime</span> package.</span></span>
-<span><span class="co">##   Please report the issue at <span style="color: #0000BB; font-style: italic;">&lt;https://github.com/thomasp85/lime/issues&gt;</span>.</span></span>
+<span><span class="co">##   Please report the issue at <span style="color: #0000BB; font-style: italic;">&lt;https://github.com/tidymodels/lime/issues&gt;</span>.</span></span>
 <span><span class="co">## <span style="color: #555555;">This warning is displayed once every 8 hours.</span></span></span>
 <span><span class="co">## <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span></span>
 <span><span class="co">## <span style="color: #555555;">generated.</span></span></span></code></pre>
@@ -367,99 +384,100 @@ conclusions.</p>
 <p>Most of the things written for <code>data.frame</code> can be applied
 to textual data.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lime.data-imaginist.com">lime</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dmlc/xgboost" class="external-link">xgboost</a></span><span class="op">)</span> <span class="co"># the classifier</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://text2vec.org" class="external-link">text2vec</a></span><span class="op">)</span> <span class="co"># used to build the BoW matrix</span></span>
+<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/is_installed.html" class="external-link">is_installed</a></span><span class="op">(</span><span class="st">"xgboost"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lime.data-imaginist.com">lime</a></span><span class="op">)</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dmlc/xgboost" class="external-link">xgboost</a></span><span class="op">)</span> <span class="co"># the classifier</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://text2vec.org" class="external-link">text2vec</a></span><span class="op">)</span> <span class="co"># used to build the BoW matrix</span></span>
 <span></span>
-<span><span class="co"># load data</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">train_sentences</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">test_sentences</span><span class="op">)</span></span>
+<span>  <span class="co"># load data</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">train_sentences</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">test_sentences</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Data are stored in a 2 columns data.frame, one for the sentences, one for the </span></span>
-<span><span class="co"># labels.</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">train_sentences</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="co"># Data are stored in a 2 columns data.frame, one for the sentences, one for the</span></span>
+<span>  <span class="co"># labels.</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">train_sentences</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># The list of possible classes for a sentence</span></span>
+<span>  <span class="co"># We are only interested in the class "OWNX"</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">train_sentences</span><span class="op">$</span><span class="va">class.text</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Tokenize data</span></span>
+<span>  <span class="va">get_matrix</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">text</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">it</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/text2vec/man/itoken.html" class="external-link">itoken</a></span><span class="op">(</span><span class="va">text</span>, progressbar <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/text2vec/man/create_dtm.html" class="external-link">create_dtm</a></span><span class="op">(</span><span class="va">it</span>, vectorizer <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/text2vec/man/vectorizers.html" class="external-link">hash_vectorizer</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span></span>
+<span>  <span class="co"># BoW matrix generation</span></span>
+<span>  <span class="va">dtm_train</span> <span class="op">=</span> <span class="fu">get_matrix</span><span class="op">(</span><span class="va">train_sentences</span><span class="op">$</span><span class="va">text</span><span class="op">)</span></span>
+<span>  <span class="va">dtm_test</span> <span class="op">=</span> <span class="fu">get_matrix</span><span class="op">(</span><span class="va">test_sentences</span><span class="op">$</span><span class="va">text</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Create boosting model for binary classification (-&gt; logistic loss)</span></span>
+<span>  <span class="co"># Other parameters are quite standard</span></span>
+<span>  <span class="va">param</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    max_depth <span class="op">=</span> <span class="fl">7</span>,</span>
+<span>    eta <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>    objective <span class="op">=</span> <span class="st">"binary:logistic"</span>,</span>
+<span>    eval_metric <span class="op">=</span> <span class="st">"error"</span>,</span>
+<span>    nthread <span class="op">=</span> <span class="fl">1</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span>  <span class="va">xgb_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/xgboost/man/xgb.train.html" class="external-link">xgb.train</a></span><span class="op">(</span></span>
+<span>    <span class="va">param</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/xgboost/man/xgb.DMatrix.html" class="external-link">xgb.DMatrix</a></span><span class="op">(</span><span class="va">dtm_train</span>, label <span class="op">=</span> <span class="va">train_sentences</span><span class="op">$</span><span class="va">class.text</span> <span class="op">==</span> <span class="st">"OWNX"</span><span class="op">)</span>,</span>
+<span>    nrounds <span class="op">=</span> <span class="fl">50</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 <pre><code><span><span class="co">## 'data.frame':    2517 obs. of  2 variables:</span></span>
 <span><span class="co">##  $ class.text: chr  "MISC" "MISC" "AIMX" "OWNX" ...</span></span>
 <span><span class="co">##  $ text      : chr  "although the internet as level topology has been extensively studied over the past few years  little is known a"| __truncated__ "an as  node  can represent a wide variety of organizations  e g   large isp  or small private business  univers"| __truncated__ "in this paper  we introduce a radically new approach based on machine learning techniques to map all the ases i"| __truncated__ "we believe that this dataset will serve as an invaluable addition to further understanding of the structure and"| __truncated__ ...</span></span>
-<span><span class="co">## NULL</span></span></code></pre>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># The list of possible classes for a sentence</span></span>
-<span><span class="co"># We are only interested in the class "OWNX"</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">train_sentences</span><span class="op">$</span><span class="va">class.text</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##  [1] "MISC"                "AIMX"                "OWNX"               </span></span>
+<span><span class="co">## NULL</span></span>
+<span><span class="co">##  [1] "MISC"                "AIMX"                "OWNX"               </span></span>
 <span><span class="co">##  [4] "BASE"                "CONT"                "MISC--the"          </span></span>
 <span><span class="co">##  [7] "AIMX--on"            "OWNX--after"         "MISC--in"           </span></span>
 <span><span class="co">## [10] "MISC--specifically," "MISC--on"            "MISC--several"      </span></span>
 <span><span class="co">## [13] "CONT--these"         "OWNX--we"            "MISC--for"</span></span></code></pre>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Tokenize data</span></span>
-<span><span class="va">get_matrix</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">text</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">it</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/text2vec/man/itoken.html" class="external-link">itoken</a></span><span class="op">(</span><span class="va">text</span>, progressbar <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/text2vec/man/create_dtm.html" class="external-link">create_dtm</a></span><span class="op">(</span><span class="va">it</span>, vectorizer <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/text2vec/man/vectorizers.html" class="external-link">hash_vectorizer</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span></span>
-<span><span class="co"># BoW matrix generation</span></span>
-<span><span class="va">dtm_train</span> <span class="op">=</span> <span class="fu">get_matrix</span><span class="op">(</span><span class="va">train_sentences</span><span class="op">$</span><span class="va">text</span><span class="op">)</span></span>
-<span><span class="va">dtm_test</span> <span class="op">=</span> <span class="fu">get_matrix</span><span class="op">(</span><span class="va">test_sentences</span><span class="op">$</span><span class="va">text</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Create boosting model for binary classification (-&gt; logistic loss)</span></span>
-<span><span class="co"># Other parameters are quite standard</span></span>
-<span><span class="va">param</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>max_depth <span class="op">=</span> <span class="fl">7</span>, </span>
-<span>              eta <span class="op">=</span> <span class="fl">0.1</span>, </span>
-<span>              objective <span class="op">=</span> <span class="st">"binary:logistic"</span>, </span>
-<span>              eval_metric <span class="op">=</span> <span class="st">"error"</span>, </span>
-<span>              nthread <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">xgb_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/xgboost/man/xgb.train.html" class="external-link">xgb.train</a></span><span class="op">(</span></span>
-<span>  <span class="va">param</span>, </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/xgboost/man/xgb.DMatrix.html" class="external-link">xgb.DMatrix</a></span><span class="op">(</span><span class="va">dtm_train</span>, label <span class="op">=</span> <span class="va">train_sentences</span><span class="op">$</span><span class="va">class.text</span> <span class="op">==</span> <span class="st">"OWNX"</span><span class="op">)</span>,</span>
-<span>  nrounds <span class="op">=</span> <span class="fl">50</span></span>
-<span><span class="op">)</span></span></code></pre></div>
 <p>We will test our model on test data.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># We use a (standard) threshold of 0.5</span></span>
-<span><span class="va">predictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">xgb_model</span>, <span class="va">dtm_test</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0.5</span></span>
-<span><span class="va">test_labels</span> <span class="op">&lt;-</span> <span class="va">test_sentences</span><span class="op">$</span><span class="va">class.text</span> <span class="op">==</span> <span class="st">"OWNX"</span></span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/is_installed.html" class="external-link">is_installed</a></span><span class="op">(</span><span class="st">"xgboost"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># We use a (standard) threshold of 0.5</span></span>
+<span>  <span class="va">predictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">xgb_model</span>, <span class="va">dtm_test</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0.5</span></span>
+<span>  <span class="va">test_labels</span> <span class="op">&lt;-</span> <span class="va">test_sentences</span><span class="op">$</span><span class="va">class.text</span> <span class="op">==</span> <span class="st">"OWNX"</span></span>
 <span></span>
-<span><span class="co"># Accuracy</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">predictions</span> <span class="op">==</span> <span class="va">test_labels</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="co"># Accuracy</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">predictions</span> <span class="op">==</span> <span class="va">test_labels</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 0.845</span></span></code></pre>
 <p>Now we are sure that the model works, we may want to understand what
 are the most important words for the predictions.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># We select 10 sentences from the label OWNX</span></span>
-<span><span class="va">sentence_to_explain</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">test_sentences</span><span class="op">[</span><span class="va">test_labels</span>,<span class="op">]</span><span class="op">$</span><span class="va">text</span>, <span class="fl">5</span><span class="op">)</span></span>
-<span><span class="va">explainer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lime.html">lime</a></span><span class="op">(</span><span class="va">sentence_to_explain</span>, model <span class="op">=</span> <span class="va">xgb_model</span>, </span>
-<span>                  preprocess <span class="op">=</span> <span class="va">get_matrix</span><span class="op">)</span></span>
-<span><span class="va">explanation</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/explain.html">explain</a></span><span class="op">(</span><span class="va">sentence_to_explain</span>, <span class="va">explainer</span>, n_labels <span class="op">=</span> <span class="fl">1</span>, </span>
-<span>                       n_features <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw">if</span> <span class="op">(</span><span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/is_installed.html" class="external-link">is_installed</a></span><span class="op">(</span><span class="st">"xgboost"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">sentence_to_explain</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">test_sentences</span><span class="op">[</span><span class="va">test_labels</span>, <span class="op">]</span><span class="op">$</span><span class="va">text</span>, <span class="fl">5</span><span class="op">)</span></span>
+<span>  <span class="va">explainer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lime.html">lime</a></span><span class="op">(</span></span>
+<span>    <span class="va">sentence_to_explain</span>,</span>
+<span>    model <span class="op">=</span> <span class="va">xgb_model</span>,</span>
+<span>    preprocess <span class="op">=</span> <span class="va">get_matrix</span></span>
+<span>  <span class="op">)</span></span>
+<span>  <span class="va">explanation</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/explain.html">explain</a></span><span class="op">(</span></span>
+<span>    <span class="va">sentence_to_explain</span>,</span>
+<span>    <span class="va">explainer</span>,</span>
+<span>    n_labels <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>    n_features <span class="op">=</span> <span class="fl">2</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Most of the words choosen by Lime</span></span>
+<span>  <span class="co"># are related to the team (we, our)</span></span>
+<span>  <span class="co"># or part of the paper (Section, in)</span></span>
+<span>  <span class="va">explanation</span><span class="op">[</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">9</span><span class="op">]</span></span>
+<span></span>
+<span>  <span class="co"># Another more graphical view of the same information (2 first sentences only)</span></span>
+<span>  <span class="fu"><a href="../reference/plot_features.html">plot_features</a></span><span class="op">(</span><span class="va">explanation</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning in explain.character(sentence_to_explain, explainer, n_labels = 1, :</span></span>
 <span><span class="co">## "labels" and "n_labels" arguments are ignored when explaining regression models</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in throw_err_or_depr_msg("Parameter(s) have been removed from this</span></span>
 <span><span class="co">## function: ", : Parameter(s) have been removed from this function: reshape. This</span></span>
 <span><span class="co">## warning will become an error in a future version.</span></span></code></pre>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Most of the words choosen by Lime</span></span>
-<span><span class="co"># are related to the team (we, our)</span></span>
-<span><span class="co"># or part of the paper (Section, in)</span></span>
-<span><span class="va">explanation</span><span class="op">[</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">9</span><span class="op">]</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A data frame: 10 × 8</span></span></span>
-<span><span class="co">##     case model_r2 model_intercept model_prediction feature feature_value</span></span>
-<span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 1</span>     1    0.980           0.333            0.618 we      we           </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 2</span>     1    0.980           0.333            0.618 in      in           </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 3</span>     2    0.916           0.253            0.762 We      We           </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 4</span>     2    0.916           0.253            0.762 the     the          </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 5</span>     3    0.883           0.318            0.533 we      we           </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 6</span>     3    0.883           0.318            0.533 in      in           </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 7</span>     4    0.943           0.388            0.940 Section Section      </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 8</span>     4    0.943           0.388            0.940 we      we           </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 9</span>     5    0.468           0.273            0.722 general general      </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">10</span>     5    0.468           0.273            0.722 our     our          </span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 2 more variables: feature_weight &lt;dbl&gt;, feature_desc &lt;chr&gt;</span></span></span></code></pre>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Another more graphical view of the same information (2 first sentences only)</span></span>
-<span><span class="fu"><a href="../reference/plot_features.html">plot_features</a></span><span class="op">(</span><span class="va">explanation</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning in plot_features(explanation): NAs introduced by coercion</span></span></code></pre>
 <pre><code><span><span class="co">## Warning: Position guide is perpendicular to the intended axis.</span></span>
 <span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Did you mean to specify a different guide `position`?</span></span>
@@ -479,7 +497,7 @@ words. Another approach to explain a text classification model is to see
 the most important words in their context. This requires htmlwidgets and
 will not be evaluated in this vignette, but you can run it locally and
 examine the output</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/text_explanations.html">plot_text_explanations</a></span><span class="op">(</span><span class="va">explanation</span><span class="op">)</span></span></code></pre></div>
 <p>If you have run this locally you can see that for some sentences, the
 prediction is wrong. For instance, look at the third sentence. The word
@@ -496,7 +514,7 @@ category <code>OWNX</code>, mainly because of the presence of the word
 explore interactively the model.</p>
 <p>After loading the application, both text and parameters can be
 modified. Prediction and selected words are updated in real time.</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Launching the application is done in one command</span></span>
 <span><span class="fu"><a href="../reference/interactive_text_explanations.html">interactive_text_explanations</a></span><span class="op">(</span><span class="va">explainer</span><span class="op">)</span></span></code></pre></div>
 <div class="float">
@@ -516,7 +534,7 @@ modified. Prediction and selected words are updated in real time.</p>
 <span><span class="co">##  collate  C.UTF-8</span></span>
 <span><span class="co">##  ctype    C.UTF-8</span></span>
 <span><span class="co">##  tz       UTC</span></span>
-<span><span class="co">##  date     2025-12-08</span></span>
+<span><span class="co">##  date     2025-12-09</span></span>
 <span><span class="co">##  pandoc   3.1.11 @ /opt/hostedtoolcache/pandoc/3.1.11/x64/ (via rmarkdown)</span></span>
 <span><span class="co">##  quarto   NA</span></span>
 <span><span class="co">## </span></span>
@@ -552,7 +570,7 @@ modified. Prediction and selected words are updated in real time.</p>
 <span><span class="co">##  lattice        0.22-7     <span style="color: #555555;">2025-04-02</span> <span style="color: #555555;">[3]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
 <span><span class="co">##  lgr            0.5.0      <span style="color: #555555;">2025-07-23</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
 <span><span class="co">##  lifecycle      1.0.4      <span style="color: #555555;">2023-11-07</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
-<span><span class="co">##  lime         * <span style="color: #BB00BB; font-weight: bold;">0.5.3.9000</span> <span style="color: #555555;">2025-12-08</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">local</span></span></span>
+<span><span class="co">##  lime         * <span style="color: #BB00BB; font-weight: bold;">0.5.3.9000</span> <span style="color: #555555;">2025-12-09</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">local</span></span></span>
 <span><span class="co">##  MASS         * 7.3-65     <span style="color: #555555;">2025-02-28</span> <span style="color: #555555;">[3]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
 <span><span class="co">##  Matrix         1.7-4      <span style="color: #555555;">2025-08-28</span> <span style="color: #555555;">[3]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
 <span><span class="co">##  mlapi          0.1.1      <span style="color: #555555;">2022-04-24</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
@@ -576,7 +594,6 @@ modified. Prediction and selected words are updated in real time.</p>
 <span><span class="co">##  systemfonts    1.3.1      <span style="color: #555555;">2025-10-01</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
 <span><span class="co">##  text2vec     * 0.6.6      <span style="color: #555555;">2025-12-01</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
 <span><span class="co">##  textshaping    1.0.4      <span style="color: #555555;">2025-10-10</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
-<span><span class="co">##  utf8           1.2.6      <span style="color: #555555;">2025-06-08</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
 <span><span class="co">##  vctrs          0.6.5      <span style="color: #555555;">2023-12-01</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
 <span><span class="co">##  withr          3.0.2      <span style="color: #555555;">2024-10-28</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
 <span><span class="co">##  xfun           0.54       <span style="color: #555555;">2025-10-30</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>

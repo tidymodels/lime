@@ -50,7 +50,7 @@
     </li>
   </ul></li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/thomasp85/lime" class="external-link">
+  <a href="https://github.com/tidymodels/lime" class="external-link">
     <span class="fa fa-github fa-lg"></span>
 
   </a>
@@ -65,7 +65,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
       <h1 data-toc-skip>Changelog <small></small></h1>
-      <small>Source: <a href="https://github.com/thomasp85/lime/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/tidymodels/lime/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
@@ -88,15 +88,15 @@
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.5.0" id="lime-050">lime 0.5.0<small>2019-06-24</small><a class="anchor" aria-label="anchor" href="#lime-050"></a></h2>
 <ul><li>
-<code><a href="../reference/explain.html">explain()</a></code> will now pass <code>...</code> on to the relevant <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code> method (<a href="https://github.com/thomasp85/lime/issues/150" class="external-link">#150</a>)</li>
+<code><a href="../reference/explain.html">explain()</a></code> will now pass <code>...</code> on to the relevant <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code> method (<a href="https://github.com/tidymodels/lime/issues/150" class="external-link">#150</a>)</li>
 <li>
-<code><a href="../reference/explain.html">explain.data.frame()</a></code> gains a <code>gower_pow</code> argument to modify the calculated gower distance before use by raising it to the power of the given value (<a href="https://github.com/thomasp85/lime/issues/158" class="external-link">#158</a>)</li>
-<li>Fixed a bug when calculating R^2 on single feature explanations (<a href="https://github.com/pkopper" class="external-link">@pkopper</a>, <a href="https://github.com/thomasp85/lime/issues/157" class="external-link">#157</a>)</li>
-<li>Fixed formatting of text prediction html presentation (<a href="https://github.com/thomasp85/lime/issues/145" class="external-link">#145</a>)</li>
-<li>Fixed a bug when setting feature select method to “none” (<a href="https://github.com/thomasp85/lime/issues/141" class="external-link">#141</a>)</li>
-<li>Changes default colouring from green-red to blue-red (<a href="https://github.com/thomasp85/lime/issues/137" class="external-link">#137</a>)</li>
+<code><a href="../reference/explain.html">explain.data.frame()</a></code> gains a <code>gower_pow</code> argument to modify the calculated gower distance before use by raising it to the power of the given value (<a href="https://github.com/tidymodels/lime/issues/158" class="external-link">#158</a>)</li>
+<li>Fixed a bug when calculating R^2 on single feature explanations (<a href="https://github.com/pkopper" class="external-link">@pkopper</a>, <a href="https://github.com/tidymodels/lime/issues/157" class="external-link">#157</a>)</li>
+<li>Fixed formatting of text prediction html presentation (<a href="https://github.com/tidymodels/lime/issues/145" class="external-link">#145</a>)</li>
+<li>Fixed a bug when setting feature select method to “none” (<a href="https://github.com/tidymodels/lime/issues/141" class="external-link">#141</a>)</li>
+<li>Changes default colouring from green-red to blue-red (<a href="https://github.com/tidymodels/lime/issues/137" class="external-link">#137</a>)</li>
 <li>
-<code><a href="../reference/lime.html">lime()</a></code> now warns when quantile binning is not feasible and uses standard binning instead (<a href="https://github.com/thomasp85/lime/issues/154" class="external-link">#154</a>)</li>
+<code><a href="../reference/lime.html">lime()</a></code> now warns when quantile binning is not feasible and uses standard binning instead (<a href="https://github.com/tidymodels/lime/issues/154" class="external-link">#154</a>)</li>
 <li>Changed the <code>lambda</code> value in the local model fit to match the one used in the Python version according to the relationship given here: <a href="https://stats.stackexchange.com/a/270705" class="external-link uri">https://stats.stackexchange.com/a/270705</a>
 </li>
 <li>Added pkgdown site at <a href="https://lime.data-imaginist.com" class="uri">https://lime.data-imaginist.com</a>
@@ -121,30 +121,30 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.4" id="lime-04">lime 0.4<a class="anchor" aria-label="anchor" href="#lime-04"></a></h2>
-<ul><li>Add support for image explanation. The dispatch will be on paths pointing to valid image files. Image explanations can be visualised using <code>plot_image_explanation</code> (<a href="https://github.com/thomasp85/lime/issues/35" class="external-link">#35</a>)</li>
+<ul><li>Add support for image explanation. The dispatch will be on paths pointing to valid image files. Image explanations can be visualised using <code>plot_image_explanation</code> (<a href="https://github.com/tidymodels/lime/issues/35" class="external-link">#35</a>)</li>
 <li>Add support for neural networks from the <code>keras</code> package</li>
 <li>Add <code><a href="../reference/as_classifier.html">as_classifier()</a></code> and <code><a href="../reference/as_classifier.html">as_regressor()</a></code> for ad-hoc specification of the model type in case the heuristic implemented in <code>lime</code> doesn’t hold. <code><a href="../reference/as_classifier.html">as_classifier()</a></code> also lets you add/overwrite the class labels.</li>
 <li>Use <code>gower</code> as the new default similarity measure for tabular data</li>
 <li>If <code>bin_continuous = FALSE</code> the default behavior is now to sample from a kernel density estimation rather than assume a normal distribution.</li>
-<li>Fix bug when numeric features in the training data were constant (<a href="https://github.com/thomasp85/lime/issues/56" class="external-link">#56</a>)</li>
-<li>Fix bug when plotting regression explanations with <code><a href="../reference/plot_explanations.html">plot_explanations()</a></code> (<a href="https://github.com/thomasp85/lime/issues/60" class="external-link">#60</a>)</li>
-<li>Logical columns in tabular data is now supported (<a href="https://github.com/thomasp85/lime/issues/75" class="external-link">#75</a>)</li>
+<li>Fix bug when numeric features in the training data were constant (<a href="https://github.com/tidymodels/lime/issues/56" class="external-link">#56</a>)</li>
+<li>Fix bug when plotting regression explanations with <code><a href="../reference/plot_explanations.html">plot_explanations()</a></code> (<a href="https://github.com/tidymodels/lime/issues/60" class="external-link">#60</a>)</li>
+<li>Logical columns in tabular data is now supported (<a href="https://github.com/tidymodels/lime/issues/75" class="external-link">#75</a>)</li>
 <li>Overhaul of <code>plot_text_explanation()</code> with better formatting and scrolling support for many explanations</li>
 <li>All plots now show the fit of the explainer so the user can assess the quality of the explanation</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3.1" id="lime-031">lime 0.3.1<small>2017-11-24</small><a class="anchor" aria-label="anchor" href="#lime-031"></a></h2>
 <ul><li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
-<li>Fixed bug when explaining regression models, due to drop=TRUE defaults (<a href="https://github.com/thomasp85/lime/issues/33" class="external-link">#33</a>)</li>
-<li>Integer features are no longer converted to numeric during permutations (<a href="https://github.com/thomasp85/lime/issues/32" class="external-link">#32</a>)</li>
-<li>Fix bug when working with xgboost and tabular predictions (<a href="https://github.com/martinju" class="external-link">@martinju</a> <a href="https://github.com/thomasp85/lime/issues/1" class="external-link">#1</a>)</li>
-<li>Training data can now contain <code>NA</code> values (<a href="https://github.com/thomasp85/lime/issues/8" class="external-link">#8</a>)</li>
-<li>Keep ordering when plotting with <code><a href="../reference/plot_features.html">plot_features()</a></code> (<a href="https://github.com/thomasp85/lime/issues/38" class="external-link">#38</a>)</li>
+<li>Fixed bug when explaining regression models, due to drop=TRUE defaults (<a href="https://github.com/tidymodels/lime/issues/33" class="external-link">#33</a>)</li>
+<li>Integer features are no longer converted to numeric during permutations (<a href="https://github.com/tidymodels/lime/issues/32" class="external-link">#32</a>)</li>
+<li>Fix bug when working with xgboost and tabular predictions (<a href="https://github.com/martinju" class="external-link">@martinju</a> <a href="https://github.com/tidymodels/lime/issues/1" class="external-link">#1</a>)</li>
+<li>Training data can now contain <code>NA</code> values (<a href="https://github.com/tidymodels/lime/issues/8" class="external-link">#8</a>)</li>
+<li>Keep ordering when plotting with <code><a href="../reference/plot_features.html">plot_features()</a></code> (<a href="https://github.com/tidymodels/lime/issues/38" class="external-link">#38</a>)</li>
 <li>Fix support for mlr by extracting predictions correctly</li>
-<li>Added support for <code>h2o</code> (<a href="https://github.com/mdancho84" class="external-link">@mdancho84</a>) (<a href="https://github.com/thomasp85/lime/issues/40" class="external-link">#40</a>)</li>
-<li>Throws meaningful error when all permutations have 0 similarity to original observation (<a href="https://github.com/thomasp85/lime/issues/47" class="external-link">#47</a>)</li>
-<li>Explaining data can now contain <code>NA</code> values (<a href="https://github.com/thomasp85/lime/issues/45" class="external-link">#45</a>)</li>
-<li>Support for <code>Date</code> and <code>POSIXt</code> columns. They will be kept constant during permutations so that <code>lime</code> will explain the model behaviour at the given timepoint based on the remaining features (<a href="https://github.com/thomasp85/lime/issues/39" class="external-link">#39</a>).</li>
+<li>Added support for <code>h2o</code> (<a href="https://github.com/mdancho84" class="external-link">@mdancho84</a>) (<a href="https://github.com/tidymodels/lime/issues/40" class="external-link">#40</a>)</li>
+<li>Throws meaningful error when all permutations have 0 similarity to original observation (<a href="https://github.com/tidymodels/lime/issues/47" class="external-link">#47</a>)</li>
+<li>Explaining data can now contain <code>NA</code> values (<a href="https://github.com/tidymodels/lime/issues/45" class="external-link">#45</a>)</li>
+<li>Support for <code>Date</code> and <code>POSIXt</code> columns. They will be kept constant during permutations so that <code>lime</code> will explain the model behaviour at the given timepoint based on the remaining features (<a href="https://github.com/tidymodels/lime/issues/39" class="external-link">#39</a>).</li>
 <li>Add <code><a href="../reference/plot_explanations.html">plot_explanations()</a></code> for an overview plot of a large explanation set</li>
 </ul></div>
   </div>

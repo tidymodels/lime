@@ -78,7 +78,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/thomasp85/lime" class="external-link">
+  <a href="https://github.com/tidymodels/lime" class="external-link">
     <span class="fa fa-github fa-lg"></span>
 
   </a>
@@ -140,21 +140,28 @@
 <span><span class="co">#&gt; # A tibble: 10 × 13</span></span>
 <span><span class="co">#&gt;    model_type   case  label label_prob model_r2 model_intercept model_prediction</span></span>
 <span><span class="co">#&gt;    &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt;           &lt;dbl&gt;            &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt;  1 classificat… 1     seto…          1    0.695           0.118            0.991</span></span>
-<span><span class="co">#&gt;  2 classificat… 1     seto…          1    0.695           0.118            0.991</span></span>
-<span><span class="co">#&gt;  3 classificat… 2     seto…          1    0.680           0.123            0.974</span></span>
-<span><span class="co">#&gt;  4 classificat… 2     seto…          1    0.680           0.123            0.974</span></span>
-<span><span class="co">#&gt;  5 classificat… 3     seto…          1    0.668           0.134            0.972</span></span>
-<span><span class="co">#&gt;  6 classificat… 3     seto…          1    0.668           0.134            0.972</span></span>
-<span><span class="co">#&gt;  7 classificat… 4     seto…          1    0.668           0.132            0.980</span></span>
-<span><span class="co">#&gt;  8 classificat… 4     seto…          1    0.668           0.132            0.980</span></span>
-<span><span class="co">#&gt;  9 classificat… 5     seto…          1    0.691           0.125            0.980</span></span>
-<span><span class="co">#&gt; 10 classificat… 5     seto…          1    0.691           0.125            0.980</span></span>
-<span><span class="co">#&gt; # … with 6 more variables: feature &lt;chr&gt;, feature_value &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   feature_weight &lt;dbl&gt;, feature_desc &lt;chr&gt;, data &lt;list&gt;, prediction &lt;list&gt;</span></span>
+<span><span class="co">#&gt;  1 classificat… 1     seto…          1    0.686           0.125            0.978</span></span>
+<span><span class="co">#&gt;  2 classificat… 1     seto…          1    0.686           0.125            0.978</span></span>
+<span><span class="co">#&gt;  3 classificat… 2     seto…          1    0.696           0.119            0.982</span></span>
+<span><span class="co">#&gt;  4 classificat… 2     seto…          1    0.696           0.119            0.982</span></span>
+<span><span class="co">#&gt;  5 classificat… 3     seto…          1    0.682           0.123            0.977</span></span>
+<span><span class="co">#&gt;  6 classificat… 3     seto…          1    0.682           0.123            0.977</span></span>
+<span><span class="co">#&gt;  7 classificat… 4     seto…          1    0.679           0.124            0.979</span></span>
+<span><span class="co">#&gt;  8 classificat… 4     seto…          1    0.679           0.124            0.979</span></span>
+<span><span class="co">#&gt;  9 classificat… 5     seto…          1    0.688           0.123            0.988</span></span>
+<span><span class="co">#&gt; 10 classificat… 5     seto…          1    0.688           0.123            0.988</span></span>
+<span><span class="co">#&gt; # ℹ 6 more variables: feature &lt;chr&gt;, feature_value &lt;dbl&gt;, feature_weight &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   feature_desc &lt;chr&gt;, data &lt;list&gt;, prediction &lt;list&gt;</span></span>
 <span></span>
 <span><span class="co"># And can be visualised directly</span></span>
-<span><span class="fu"><a href="reference/plot_features.html">plot_features</a></span><span class="op">(</span><span class="va">explanation</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="reference/plot_features.html">plot_features</a></span><span class="op">(</span><span class="va">explanation</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: `aes_()` was deprecated in ggplot2 3.0.0.</span></span>
+<span><span class="co">#&gt; ℹ Please use tidy evaluation idioms with `aes()`</span></span>
+<span><span class="co">#&gt; ℹ The deprecated feature was likely used in the lime package.</span></span>
+<span><span class="co">#&gt;   Please report the issue at &lt;https://github.com/tidymodels/lime/issues&gt;.</span></span>
+<span><span class="co">#&gt; This warning is displayed once every 8 hours.</span></span>
+<span><span class="co">#&gt; Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span>
+<span><span class="co">#&gt; generated.</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-2-1.png"><!-- --></p>
 <p><code>lime</code> also supports explaining image and text models. For image explanations the relevant areas in an image can be highlighted:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -164,9 +171,9 @@
 <p><img src="reference/figures/README-unnamed-chunk-3-1.png"><!-- --></p>
 <p>Here we see that the second most probably class is hardly true, but is due to the model picking up waxy areas of the produce and interpreting them as wax-light surface.</p>
 <p>For text the explanation can be shown by highlighting the important words. It even includes a <code>shiny</code> application for interactively exploring text models:</p>
-<div class="float">
-<img src="reference/figures/shine_text_explanations.gif" alt="interactive text explainer"><div class="figcaption">interactive text explainer</div>
-</div>
+<figure><img src="reference/figures/shine_text_explanations.gif" alt="interactive text explainer"><figcaption aria-hidden="true">
+interactive text explainer
+</figcaption></figure>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -176,8 +183,8 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'lime'</span><span class="op">)</span></span></code></pre></div>
 <p>To get the development version, install from GitHub instead:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages('devtools')</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">'thomasp85/lime'</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># install.packages('pak')</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">'tidymodels/lime'</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
@@ -192,8 +199,8 @@
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
 <li><a href="https://cloud.r-project.org/package=lime" class="external-link">View on CRAN</a></li>
-<li><a href="https://github.com/thomasp85/lime/" class="external-link">Browse source code</a></li>
-<li><a href="https://github.com/thomasp85/lime/issues" class="external-link">Report a bug</a></li>
+<li><a href="https://github.com/tidymodels/lime/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/tidymodels/lime/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
@@ -232,10 +239,12 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/thomasp85/lime/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/thomasp85/lime/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://app.codecov.io/gh/thomasp85/lime?branch=main" class="external-link"><img src="https://codecov.io/gh/thomasp85/lime/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://github.com/tidymodels/lime/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/tidymodels/lime/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://app.codecov.io/gh/tidymodels/lime" class="external-link"><img src="https://codecov.io/gh/tidymodels/lime/graph/badge.svg" alt="Codecov test coverage"></a></li>
 <li><a href="https://CRAN.R-project.org/package=lime" class="external-link"><img src="http://www.r-pkg.org/badges/version-ago/lime" alt="CRAN_Release_Badge"></a></li>
 <li><a href="https://CRAN.R-project.org/package=lime" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/lime" alt="CRAN_Download_Badge"></a></li>
+<li><a href="https://github.com/thomasp85/lime/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/thomasp85/lime/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://app.codecov.io/gh/thomasp85/lime" class="external-link"><img src="https://codecov.io/gh/thomasp85/lime/graph/badge.svg" alt="Codecov test coverage"></a></li>
 </ul>
 </div>
 
