@@ -98,7 +98,7 @@
                         <h4 data-toc-skip class="author">Thomas Lin
 Pedersen &amp; Michaël Benesty</h4>
             
-            <h4 data-toc-skip class="date">2025-12-09</h4>
+            <h4 data-toc-skip class="date">2025-12-10</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/tidymodels/lime/blob/main/vignettes/Understanding_lime.Rmd" class="external-link"><code>vignettes/Understanding_lime.Rmd</code></a></small>
       <div class="hidden name"><code>Understanding_lime.Rmd</code></div>
@@ -465,54 +465,36 @@ are the most important words for the predictions.</p>
 <span>  <span class="va">explainer</span>,</span>
 <span>  n_labels <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  n_features <span class="op">=</span> <span class="fl">2</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning in explain.character(sentence_to_explain, explainer, n_labels = 1, :</span></span>
-<span><span class="co">## "labels" and "n_labels" arguments are ignored when explaining regression models</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in throw_err_or_depr_msg("Parameter(s) have been removed from this</span></span>
-<span><span class="co">## function: ", : Parameter(s) have been removed from this function: reshape. This</span></span>
-<span><span class="co">## warning will become an error in a future version.</span></span></code></pre>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Most of the words choosen by Lime</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Most of the words choosen by Lime</span></span>
 <span><span class="co"># are related to the team (we, our)</span></span>
 <span><span class="co"># or part of the paper (Section, in)</span></span>
 <span><span class="va">explanation</span><span class="op">[</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">9</span><span class="op">]</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A data frame: 10 × 8</span></span></span>
-<span><span class="co">##     case model_r2 model_intercept model_prediction feature feature_value</span></span>
-<span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 1</span>     1    0.980           0.333            0.618 we      we           </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 2</span>     1    0.980           0.333            0.618 in      in           </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 3</span>     2    0.916           0.253            0.762 We      We           </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 4</span>     2    0.916           0.253            0.762 the     the          </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 5</span>     3    0.883           0.318            0.533 we      we           </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 6</span>     3    0.883           0.318            0.533 in      in           </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 7</span>     4    0.943           0.388            0.940 Section Section      </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 8</span>     4    0.943           0.388            0.940 we      we           </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 9</span>     5    0.468           0.273            0.722 general general      </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">10</span>     5    0.468           0.273            0.722 our     our          </span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 2 more variables: feature_weight &lt;dbl&gt;, feature_desc &lt;chr&gt;</span></span></span></code></pre>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<span><span class="co">##     case label label_prob model_r2 model_intercept model_prediction feature</span></span>
+<span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 1</span>     1 1          0.606    0.980           0.333            0.618 we     </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 2</span>     1 1          0.606    0.980           0.333            0.618 in     </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 3</span>     2 1          0.790    0.916           0.253            0.762 We     </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 4</span>     2 1          0.790    0.916           0.253            0.762 the    </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 5</span>     3 0          0.508    0.883           0.682            0.467 we     </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 6</span>     3 0          0.508    0.883           0.682            0.467 in     </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 7</span>     4 1          0.916    0.943           0.388            0.940 Section</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 8</span>     4 1          0.916    0.943           0.388            0.940 we     </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 9</span>     5 1          0.743    0.468           0.273            0.722 general</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">10</span>     5 1          0.743    0.468           0.273            0.722 our    </span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ 1 more variable: feature_value &lt;chr&gt;</span></span></span></code></pre>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Another more graphical view of the same information (2 first sentences only)</span></span>
 <span><span class="fu"><a href="../reference/plot_features.html">plot_features</a></span><span class="op">(</span><span class="va">explanation</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning in plot_features(explanation): NAs introduced by coercion</span></span></code></pre>
-<pre><code><span><span class="co">## Warning: Position guide is perpendicular to the intended axis.</span></span>
-<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Did you mean to specify a different guide `position`?</span></span>
-<span><span class="co">## Position guide is perpendicular to the intended axis.</span></span>
-<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Did you mean to specify a different guide `position`?</span></span>
-<span><span class="co">## Position guide is perpendicular to the intended axis.</span></span>
-<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Did you mean to specify a different guide `position`?</span></span>
-<span><span class="co">## Position guide is perpendicular to the intended axis.</span></span>
-<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Did you mean to specify a different guide `position`?</span></span>
-<span><span class="co">## Position guide is perpendicular to the intended axis.</span></span>
-<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Did you mean to specify a different guide `position`?</span></span></code></pre>
-<pre><code><span><span class="co">## Warning: Removed 10 rows containing missing values or values outside the scale range</span></span>
-<span><span class="co">## (`geom_col()`).</span></span></code></pre>
 <p><img src="Understanding_lime_files/figure-html/unnamed-chunk-8-1.png" class="r-plt" width="70%" style="display: block; margin: auto;"></p>
 <p>The graph view gives lots of detailed information about the selected
 words. Another approach to explain a text classification model is to see
 the most important words in their context. This requires htmlwidgets and
 will not be evaluated in this vignette, but you can run it locally and
 examine the output</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/text_explanations.html">plot_text_explanations</a></span><span class="op">(</span><span class="va">explanation</span><span class="op">)</span></span></code></pre></div>
 <p>If you have run this locally you can see that for some sentences, the
 prediction is wrong. For instance, look at the third sentence. The word
@@ -529,7 +511,7 @@ category <code>OWNX</code>, mainly because of the presence of the word
 explore interactively the model.</p>
 <p>After loading the application, both text and parameters can be
 modified. Prediction and selected words are updated in real time.</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Launching the application is done in one command</span></span>
 <span><span class="fu"><a href="../reference/interactive_text_explanations.html">interactive_text_explanations</a></span><span class="op">(</span><span class="va">explainer</span><span class="op">)</span></span></code></pre></div>
 <div class="float">
@@ -549,7 +531,7 @@ modified. Prediction and selected words are updated in real time.</p>
 <span><span class="co">##  collate  C.UTF-8</span></span>
 <span><span class="co">##  ctype    C.UTF-8</span></span>
 <span><span class="co">##  tz       UTC</span></span>
-<span><span class="co">##  date     2025-12-09</span></span>
+<span><span class="co">##  date     2025-12-10</span></span>
 <span><span class="co">##  pandoc   3.1.11 @ /opt/hostedtoolcache/pandoc/3.1.11/x64/ (via rmarkdown)</span></span>
 <span><span class="co">##  quarto   NA</span></span>
 <span><span class="co">## </span></span>
@@ -585,7 +567,7 @@ modified. Prediction and selected words are updated in real time.</p>
 <span><span class="co">##  lattice        0.22-7     <span style="color: #555555;">2025-04-02</span> <span style="color: #555555;">[3]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
 <span><span class="co">##  lgr            0.5.0      <span style="color: #555555;">2025-07-23</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
 <span><span class="co">##  lifecycle      1.0.4      <span style="color: #555555;">2023-11-07</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
-<span><span class="co">##  lime         * <span style="color: #BB00BB; font-weight: bold;">0.5.3.9000</span> <span style="color: #555555;">2025-12-09</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">local</span></span></span>
+<span><span class="co">##  lime         * <span style="color: #BB00BB; font-weight: bold;">0.5.3.9000</span> <span style="color: #555555;">2025-12-10</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">local</span></span></span>
 <span><span class="co">##  MASS         * 7.3-65     <span style="color: #555555;">2025-02-28</span> <span style="color: #555555;">[3]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
 <span><span class="co">##  Matrix         1.7-4      <span style="color: #555555;">2025-08-28</span> <span style="color: #555555;">[3]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
 <span><span class="co">##  mlapi          0.1.1      <span style="color: #555555;">2022-04-24</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span></span>
