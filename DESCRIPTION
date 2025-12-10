@@ -1,7 +1,7 @@
 Type: Package
 Package: lime
 Title: Local Interpretable Model-Agnostic Explanations
-Version: 0.5.3.9000
+Version: 0.5.4
 Authors@R: c(
     person("Emil", "Hvitfeldt", , "emil.hvitfeldt@posit.co", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-0679-1945")),
