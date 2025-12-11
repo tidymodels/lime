@@ -1,15 +1,15 @@
 Type: Package
 Package: lime
 Title: Local Interpretable Model-Agnostic Explanations
-Version: 0.5.3.9000
+Version: 0.5.4.9000
 Authors@R: c(
-    person("Emil", "Hvitfeldt", , "emilhhvitfeldt@gmail.com", role = c("aut", "cre"),
+    person("Emil", "Hvitfeldt", , "emil.hvitfeldt@posit.co", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-0679-1945")),
     person("Thomas Lin", "Pedersen", , "thomasp85@gmail.com", role = "aut",
            comment = c(ORCID = "0000-0002-5147-4711")),
     person("Michaël", "Benesty", , "michael@benesty.fr", role = "aut")
   )
-Maintainer: Emil Hvitfeldt <emilhhvitfeldt@gmail.com>
+Maintainer: Emil Hvitfeldt <emil.hvitfeldt@posit.co>
 Description: When building complex models, it is often difficult to
     explain why the model should be trusted. While global measures such as
     accuracy are useful, they cannot be used for explaining why a model
@@ -17,7 +17,7 @@ Description: When building complex models, it is often difficult to
     package) is a method for explaining the outcome of black box models by
     fitting a local model around the point in question an perturbations of
     this point. The approach is described in more detail in the article by
-    Ribeiro et al. (2016) <arXiv:1602.04938>.
+    Ribeiro et al. (2016) <doi:10.48550/arXiv.1602.04938>.
 License: MIT + file LICENSE
 URL: https://lime.data-imaginist.com, https://github.com/tidymodels/lime,
     https://lime.data-imaginist.com/

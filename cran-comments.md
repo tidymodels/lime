@@ -1,4 +1,4 @@
-Small patch release with main event being a maintainer change
+Small patch release to fix breaking tests on CRAN
 
 ## revdepcheck results
 
