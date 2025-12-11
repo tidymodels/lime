@@ -3,7 +3,7 @@ pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
   Understanding_lime: Understanding_lime.html
-last_built: 2025-12-10T00:00Z
+last_built: 2025-12-11T17:21Z
 urls:
   reference: https://lime.data-imaginist.com/reference
   article: https://lime.data-imaginist.com/articles
