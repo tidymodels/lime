@@ -1,4 +1,4 @@
-Small patch release to fix breaking tests on CRAN
+Small patch release to help RcppEigen release on CRAN
 
 ## revdepcheck results
 
