@@ -1,4 +1,4 @@
-# lime (development version)
+# lime 0.5.5
 
 * Made a change to allow RcppEigen to release easily. (#205)
 
