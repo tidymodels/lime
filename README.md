@@ -80,16 +80,16 @@ explanation
 #> # A tibble: 10 × 13
 #>    model_type   case  label label_prob model_r2 model_intercept model_prediction
 #>    <chr>        <chr> <chr>      <dbl>    <dbl>           <dbl>            <dbl>
-#>  1 classificat… 1     seto…          1    0.700           0.120            0.984
-#>  2 classificat… 1     seto…          1    0.700           0.120            0.984
-#>  3 classificat… 2     seto…          1    0.681           0.128            0.978
-#>  4 classificat… 2     seto…          1    0.681           0.128            0.978
-#>  5 classificat… 3     seto…          1    0.686           0.126            0.976
-#>  6 classificat… 3     seto…          1    0.686           0.126            0.976
-#>  7 classificat… 4     seto…          1    0.708           0.119            0.982
-#>  8 classificat… 4     seto…          1    0.708           0.119            0.982
-#>  9 classificat… 5     seto…          1    0.682           0.126            0.981
-#> 10 classificat… 5     seto…          1    0.682           0.126            0.981
+#>  1 classificat… 1     seto…      1        0.681           0.126            0.933
+#>  2 classificat… 1     seto…      1        0.681           0.126            0.933
+#>  3 classificat… 2     seto…      0.998    0.703           0.124            0.941
+#>  4 classificat… 2     seto…      0.998    0.703           0.124            0.941
+#>  5 classificat… 3     seto…      1        0.678           0.130            0.931
+#>  6 classificat… 3     seto…      1        0.678           0.130            0.931
+#>  7 classificat… 4     seto…      1        0.691           0.124            0.950
+#>  8 classificat… 4     seto…      1        0.691           0.124            0.950
+#>  9 classificat… 5     seto…      1        0.679           0.130            0.937
+#> 10 classificat… 5     seto…      1        0.679           0.130            0.937
 #> # ℹ 6 more variables: feature <chr>, feature_value <dbl>, feature_weight <dbl>,
 #> #   feature_desc <chr>, data <list>, prediction <list>
 
@@ -99,7 +99,7 @@ plot_features(explanation)
 #> ℹ Please use tidy evaluation idioms with `aes()`
 #> ℹ The deprecated feature was likely used in the lime package.
 #>   Please report the issue at <https://github.com/tidymodels/lime/issues>.
-#> This warning is displayed once every 8 hours.
+#> This warning is displayed once per session.
 #> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
 #> generated.
 ```
