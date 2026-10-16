@@ -1,5 +1,7 @@
 # lime (development version)
 
+* Made a change to allow RcppEigen to release easily. (#205)
+
 # lime 0.5.4
 
 * Make package work with all versions of xgboost. (#202)
